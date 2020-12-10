@@ -42,6 +42,7 @@ public class Customer extends User{
 
 	public void setBankAccounts(List<BankAccount> bankAccounts) {
 		this.bankAccounts = bankAccounts;
+		
 	}
 
 	public static int getCustomerId() {
@@ -49,8 +50,6 @@ public class Customer extends User{
 	}
 
 
-	
-	
 	
 
 }
