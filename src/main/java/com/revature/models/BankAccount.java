@@ -1,6 +1,5 @@
 package com.revature.models;
 
-import java.util.Scanner;//Scanner class to get user inputs 
 
 public class BankAccount {
 	
@@ -11,7 +10,6 @@ public class BankAccount {
 		this.balance = balance;
 		this.type = type;
 	}
-	
 	
 	public double getBalance() {
 		return balance;

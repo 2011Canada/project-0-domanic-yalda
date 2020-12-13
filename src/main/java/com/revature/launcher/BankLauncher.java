@@ -1,5 +1,6 @@
 package com.revature.launcher;
 
+import com.revature.menus.Display;
 import org.apache.logging.log4j.*;
 import com.revature.models.BankAccount;
 import com.revature.models.Customer;
@@ -14,14 +15,21 @@ public class BankLauncher {
 		bankLogger.info("server is operation");
 		
 		
-		//test one - failed - move display to seperate menu and call function to display menu
-		//menu selections call other fucntions to make a bank account login, register, apply for an account ...
-		Customer c = new Customer("dyalda","1234","domanic", new BankAccount(0,"checking"));
-		c.applyForBankAccount();
+		//Customer cust = new Customer("dyalda","1234","domanic","yalda", new BankAccount(0,"checking"));
+		//cust.applyForBankAccount();
+		//System.out.println(cust.toString());
 		
+		Display disp = new Display();
+		//disp.LoginMenu();
+		disp.CustomerMenu();
 		while(true) {
+			
 			//server running to get using input and server outputs
 			//controller layer
+			
+			
+			
+			break;
 			
 			
 		}
