@@ -15,7 +15,7 @@ public class BankLauncher {
 		bankLogger.info("server is operation");
 		
 		
-		//Customer cust = new Customer("dyalda","1234","domanic","yalda", new BankAccount(0,"checking"));
+		//User cust = new Customer("dyalda","1234","domanic","yalda", new BankAccount(0,"checking"));
 		//cust.applyForBankAccount();
 		//System.out.println(cust.toString());
 		

@@ -2,11 +2,11 @@ package com.revature.menus;
 
 import java.util.Scanner;
 import com.revature.models.BankAccount;
-import com.revature.models.Customer;
+import com.revature.models.*;
 import java.util.concurrent.TimeUnit;
 
 public class Display {
-
+	
 	public Display() {
 		super();
 	}
@@ -83,13 +83,26 @@ public class Display {
 		}
 		
 	}
-	public void DepositMenu() {
+	public double DepositMenu() {
+		double depositAmount;
+		
 		System.out.println("How Much do you want to deposit");
-		//call method that implements deposit into a bank account from Customer.java 
+		
+		Scanner depositInput = new Scanner(System.in);
+		depositAmount = depositInput.nextDouble();
+		
+		// when a user invokes the deposit method they will be taken into this menu to get the deposit amount
+		return depositAmount;
 	}
-	public void WithdrawMenu() {
+	
+	public double WithdrawMenu() {
+		double withdrawalAmount;
 		System.out.println("How much would you like to withdraw");
-		//call method that implements withdrawing money from a bank account from Customer.java
+		
+		Scanner withdrawalInput = new Scanner(System.in);
+		withdrawalAmount = withdrawalInput.nextDouble();
+		
+		return withdrawalAmount;
 	}
 	public void ApplyForBankAccount() { //might make it input customer that is applying for the account
 		String type = "";

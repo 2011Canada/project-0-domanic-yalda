@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.util.*;
 
 public class Customer extends User{
 	
@@ -9,6 +10,11 @@ public class Customer extends User{
 	private String firstName;
 	private String lastName;
 	private BankAccount bankAccount;
+	
+	
+	public Customer() {
+		super();
+	}
 	
 	public Customer(String username, String password, String firstName, String lastName, BankAccount bankAccount){
 		super();
@@ -21,14 +27,25 @@ public class Customer extends User{
 		// add function call that adds new instantiated customer to database
 	}
 	public BankAccount deposit(double depositAmount) {
+		BankAccount b = this.bankAccount;
 		
+		b.setBalance(b.getBalance() + depositAmount);
 		
+		//send new updated bank account info into the db
+		System.out.println("Your new BankAccount balance is: " + bankAccount.getBalance());
 		return bankAccount;
 	}
 	
 	public BankAccount withdraw(double withdrawalAmount) {
+		BankAccount b = this.bankAccount;
 		
-		
+		if (withdrawalAmount > b.getBalance()) {
+			System.out.println("You are too poor to withdraw that much money");
+		}else {
+			b.setBalance(b.getBalance() - withdrawalAmount);
+		}
+		//send new updated bank account info into the db
+		System.out.println("Your new BankAccount balance is: " + bankAccount.getBalance());	
 		return bankAccount;
 	}
 	
