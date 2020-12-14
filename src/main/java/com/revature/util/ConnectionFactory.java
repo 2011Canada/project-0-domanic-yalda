@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-//factory design pattern?
-//factory is an object that builds other objects -> based on provided configuration
+
+//factory is an object that builds other objects -> based on provided configuration, based on the factory design pattern
 public class ConnectionFactory {
 	
 	//turn the factory into a singleton so everyone can only get a connection from our factory
 	//make a private static reference to our self -> the one and only copy
-	private static ConnectionFactory cf = new ConnectionFactory(5);
+	private static ConnectionFactory cf = new ConnectionFactory(1);
 	
 	//provide a single point of access to the connection factory
 	public static ConnectionFactory getConnectionFactory() {
@@ -19,14 +19,13 @@ public class ConnectionFactory {
 	
 	
 	//this holds all of our connections
-	//we could potential implement this as a connection pool
+	//we could potential implement this as a connection pool, however, this one only implements a single connection
 	private Connection [] conn;
 	
 	//this is a very basic factory
 	//only a single param for configuration
-	//if we are making a singleton
-	//all of our constructors must be private
-	//otherwise others could make new instances
+	//if the singleton pattern is used all of the constructors must be private
+	//otherwise others could make new instances and that would no longer be a singleton pattern.  
 	private ConnectionFactory(int numberOfConnections) {
 		
 		String url = System.getenv("DB_URL");
@@ -42,16 +41,9 @@ public class ConnectionFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 	
-	//if we were going to implement for real
-	//we would want to synchronize for multiple threads
-	//add locks and .wait and .notify
-	//I'm going to pretend only thread exists
-	//and we will only ever need a single connection
+	//In a real situation one would need multiple threading for multiple connections but in this case there's only 1
 	public Connection getConnection() {
 		//TODO
 		return this.conn[0];

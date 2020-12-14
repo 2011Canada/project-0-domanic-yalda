@@ -1,18 +1,18 @@
 package com.revature.repositories;
 
+import java.util.*;
+
 import com.revature.models.BankAccount;
-import com.revature.models.User;
 
 public interface BankAccountDAO {
 
 	
-	public BankAccount addAccount();
+	public BankAccount addAccount(BankAccount ba);
 	
 	public BankAccount removeAccount();
 	
-	public User findAllCustomers();
+	public List<BankAccount> findAllAccounts();
 	
-	public User findAllEmployees();
 	
 	
 }
