@@ -29,6 +29,14 @@ public class BankLauncher {
 		Customer cust = new Customer("dyalda","1234","domanic","yalda", new BankAccount(1000,"checking"));
 		cpd.addCustomer(cust);
 		
+		/*  testing the deposit and withdraw functions
+		cust.deposit(2000);
+		System.out.println(cust.toString());
+		cust.withdraw(2000);
+		System.out.println(cust.toString());
+		cust.withdraw(5000);
+		*/
+		
 		//cust.applyForBankAccount();
 		//System.out.println(cust.toString());
 		

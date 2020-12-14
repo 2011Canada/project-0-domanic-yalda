@@ -16,6 +16,17 @@ public class Customer extends User{
 		super();
 	}
 	
+	public Customer(String username, String password, String firstName, String lastName, BankAccount bankAccount){
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.bankAccount = bankAccount;
+		
+		// add function call that adds new instantiated customer to database
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -31,17 +42,7 @@ public class Customer extends User{
 	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
 	}
-
-	public Customer(String username, String password, String firstName, String lastName, BankAccount bankAccount){
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.bankAccount = bankAccount;
-		
-		// add function call that adds new instantiated customer to database
-	}
+	
 	public BankAccount deposit(double depositAmount) {
 		BankAccount b = this.bankAccount;
 		
@@ -61,7 +62,7 @@ public class Customer extends User{
 			b.setBalance(b.getBalance() - withdrawalAmount);
 		}
 		//send new updated bank account info into the db
-		System.out.println("Your new BankAccount balance is: " + bankAccount.getBalance());	
+		System.out.println("Your BankAccount balance is: " + bankAccount.getBalance());	
 		return bankAccount;
 	}
 	
@@ -87,6 +88,11 @@ public class Customer extends User{
 		return lastName;
 	}
 	
+
+	public int getBankAccountId() {
+		return bankAccount.bankAccountId;
+	}
+
 	public BankAccount getBankAccount() {
 		return bankAccount;
 	}

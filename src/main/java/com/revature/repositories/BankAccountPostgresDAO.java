@@ -68,6 +68,7 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 			ResultSet res = s.executeQuery(sql);
 			
 			//while there is another row in the db.
+			//resultset, starts at before the first row. it goes to the first row after u call next
 			while(res.next()) {
 				//adding in new bank accounts
 				BankAccount b = new BankAccount();

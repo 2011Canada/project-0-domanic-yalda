@@ -27,15 +27,15 @@ public class CustomerPostgresDAO implements CustomerDAO {
 			
 			//inserting SQL statement
 			String CustomerSQL = "insert into \"Customer\" "
-					+ "(\"firstname\", \"lastname\", \"username\", \"password\", \"bank_account_id\")"
-					+ "values (?,?,?,?,?) returning \"customer_id\";";
+					+ "(\"firstname\", \"lastname\", \"username\", \"password\")"
+					+ "values (?,?,?,?) returning \"customer_id\";";
 			PreparedStatement insertCustomer = conn.prepareStatement(CustomerSQL);
 			
-			insertCustomer.setString(2, c.getFirstName());
-			insertCustomer.setString(3, c.getLastName());
-			insertCustomer.setString(4, c.getUsername());
-			insertCustomer.setString(5, c.getPassword());
-			insertCustomer.setObject(6, c.getBankAccount());
+			insertCustomer.setString(1, c.getFirstName());
+			insertCustomer.setString(2, c.getLastName());
+			insertCustomer.setString(3, c.getUsername());
+			insertCustomer.setString(4, c.getPassword());
+			//insertCustomer.setObject(5, c.getBankAccountId());
 			
 			insertCustomer.executeQuery();	
 		}catch(SQLException e) {

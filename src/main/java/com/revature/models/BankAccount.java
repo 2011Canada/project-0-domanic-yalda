@@ -5,24 +5,23 @@ public class BankAccount {
 	
 	private double balance;
 	private String type; //checking or saving 
-	private static int bankAccountId = 0;
+	static int bankAccountId = 0;
 	
-	public BankAccount(double balance, String type) {
-		this.balance = balance;
-		this.type = type;
-		bankAccountId++;
-	}
 	
 	public BankAccount() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public BankAccount(double balance, String type) {
+		this.balance = balance;
+		this.type = type;
+		bankAccountId++;
+	}
 	
 	public double getBalance() {
 		return balance;
 	}
-
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
