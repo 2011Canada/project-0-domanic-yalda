@@ -16,6 +16,22 @@ public class Customer extends User{
 		super();
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
 	public Customer(String username, String password, String firstName, String lastName, BankAccount bankAccount){
 		super();
 		this.username = username;

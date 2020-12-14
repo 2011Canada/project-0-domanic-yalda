@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import com.revature.launcher.BankLauncher;
 import com.revature.models.BankAccount;
 import com.revature.util.ConnectionFactory;
 
@@ -24,7 +25,7 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 			//inserting SQL statement
 			String bankAccountSQL = "insert into \"Bank_Account\" "
 					+ "(\"balance\", \"type\" )"
-					+ "values (?,?) returning \bank_account_id\";";
+					+ "values (?,?) returning \"bank_account_id\";";
 			//using the prepared statement allows for the use of provided params
 			PreparedStatement insertBankAccount = conn.prepareStatement(bankAccountSQL);
 			
@@ -60,7 +61,7 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 		List<BankAccount> allAccounts = new ArrayList<BankAccount>();
 		
 		try {
-			String sql = "select * from Bank_Accounts";
+			String sql = "select * from Bank_Accounts;";
 			
 			//for very basic sql queries a statement is used
 			Statement s = conn.createStatement();
@@ -79,6 +80,7 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 		}finally {
 			cf.releaseConnection(conn);
 		}
+		BankLauncher.bankLogger.info(allAccounts);
 		return allAccounts;
 	}
 	
