@@ -9,7 +9,7 @@ import com.revature.models.Customer;
 public interface CustomerDAO {
 
 	
-	public Customer addCustomer(Customer c);
+	public Customer addCustomer(Customer c, BankAccount b);
 	public List<Customer> findAllCustomers();
 	
 }

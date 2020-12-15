@@ -7,7 +7,7 @@ import com.revature.models.BankAccount;
 public interface BankAccountDAO {
 
 	
-	public BankAccount addAccount(BankAccount ba);
+	//public BankAccount addAccount(BankAccount ba);
 	
 	public BankAccount removeAccount();
 	

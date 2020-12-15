@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.*;
 
 import com.revature.launcher.BankLauncher;
+import com.revature.models.BankAccount;
 import com.revature.models.Customer;
 import com.revature.util.ConnectionFactory;
 
@@ -15,29 +16,36 @@ public class CustomerPostgresDAO implements CustomerDAO {
 	
 	private ConnectionFactory cf = ConnectionFactory.getConnectionFactory();
 	Connection conn = this.cf.getConnection();
+	
+	BankAccountPostgresDAO bapd = new BankAccountPostgresDAO();
 
 	public CustomerPostgresDAO() {
 		super();
 	}
 
-	public Customer addCustomer(Customer c) {
+	public Customer addCustomer(Customer c, BankAccount b) {
 		Connection conn = cf.getConnection();
 		try {
 			conn.setAutoCommit(false);
 			
 			//inserting SQL statement
-			String CustomerSQL = "insert into \"Customer\" "
+			String customerSQL = "insert into \"customer\" "
 					+ "(\"firstname\", \"lastname\", \"username\", \"password\")"
-					+ "values (?,?,?,?) returning \"customer_id\";";
-			PreparedStatement insertCustomer = conn.prepareStatement(CustomerSQL);
+					+ "values (?,?,?,?) returning \"bank_account_num\";";
+			PreparedStatement insertCustomer = conn.prepareStatement(customerSQL);
 			
 			insertCustomer.setString(1, c.getFirstName());
 			insertCustomer.setString(2, c.getLastName());
 			insertCustomer.setString(3, c.getUsername());
 			insertCustomer.setString(4, c.getPassword());
-			//insertCustomer.setObject(5, c.getBankAccountId());
+			//insertCustomer.setInt(5, (c.getBankAccount()).bankAccountNum);
 			
-			insertCustomer.executeQuery();	
+			ResultSet res = insertCustomer.executeQuery();
+			
+			if( c.getBankAccount() != null ) {
+				bapd.addAccount(c, c.getBankAccount());
+			}
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 			try {
@@ -47,7 +55,6 @@ public class CustomerPostgresDAO implements CustomerDAO {
 			}
 		}finally {	
 			try {
-				conn.commit();
 				conn.setAutoCommit(true);
 			}catch(SQLException e){
 				e.printStackTrace();
@@ -62,7 +69,7 @@ public class CustomerPostgresDAO implements CustomerDAO {
 		Connection conn = this.cf.getConnection();
 		List<Customer> allCustomers = new ArrayList<Customer>();
 		try {
-			String sql = "select * from Customer;";
+			String sql = "select * from customer ;";
 			
 			Statement s = conn.createStatement();
 			ResultSet res = s.executeQuery(sql);
@@ -74,7 +81,7 @@ public class CustomerPostgresDAO implements CustomerDAO {
 				c.setLastName(res.getString("lastname"));
 				c.setUsername(res.getString("username"));
 				c.setPassword(res.getString("password"));
-				//c.setBankAccount(res.getObject("bank_account_id")); //reference index to bank account object
+				
 				allCustomers.add(c);
 			}
 		}catch(SQLException e){
@@ -86,4 +93,5 @@ public class CustomerPostgresDAO implements CustomerDAO {
 		return allCustomers;
 	}
 
+	
 }

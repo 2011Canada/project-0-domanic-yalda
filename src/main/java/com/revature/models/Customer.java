@@ -88,9 +88,11 @@ public class Customer extends User{
 		return lastName;
 	}
 	
-
 	public int getBankAccountId() {
 		return bankAccount.bankAccountId;
+	}
+	public void setBankAccountId(int bankAccountId) {
+		this.bankAccount.bankAccountId = bankAccountId;
 	}
 
 	public BankAccount getBankAccount() {
@@ -102,6 +104,13 @@ public class Customer extends User{
 		
 	}
 
+	public int getBankAccountNum() {
+		return this.bankAccount.bankAccountNum;
+	}
+
+	public void setBankAccountNum(int bankAccountNum) {
+		this.bankAccount.bankAccountNum = bankAccountNum;
+	}
 	public static int getCustomerId() {
 		return CustomerId;
 	}

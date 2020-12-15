@@ -9,6 +9,7 @@ import java.util.*;
 
 import com.revature.launcher.BankLauncher;
 import com.revature.models.BankAccount;
+import com.revature.models.Customer;
 import com.revature.util.ConnectionFactory;
 
 public class BankAccountPostgresDAO implements BankAccountDAO{
@@ -16,23 +17,28 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 	private ConnectionFactory cf = ConnectionFactory.getConnectionFactory();
 	Connection conn = this.cf.getConnection();
 	
-	public BankAccount addAccount(BankAccount ba) {
+	public BankAccountPostgresDAO() {
+		super();
+	}
+	
+	// /* technically cant add an account without a customer so not needed 
+	public BankAccount addAccount(Customer c, BankAccount ba) {
 		
 		Connection conn = cf.getConnection();
 		try {
 			conn.setAutoCommit(false);
 			
 			//inserting SQL statement
-			String bankAccountSQL = "insert into \"Bank_Account\" "
-					+ "(\"balance\", \"type\" )"
-					+ "values (?,?) returning \"bank_account_id\";";
-			//using the prepared statement allows for the use of provided params
-			PreparedStatement insertBankAccount = conn.prepareStatement(bankAccountSQL);
+			String bankSQL = "insert into \"bank_account\" "
+					+ "(\"balance\", \"type\", \"account_num\")"
+					+ "values (?,?,?);";
+			PreparedStatement insertBankAccount = conn.prepareStatement(bankSQL);
 			
-			insertBankAccount.setDouble(2, ba.getBalance());
-			insertBankAccount.setString(3, ba.getType());
+			insertBankAccount.setDouble(1, c.getBankAccount().getBalance());
+			insertBankAccount.setString(2, c.getBankAccount().getType());
+			insertBankAccount.setInt(3, c.getBankAccountNum());
 			
-			insertBankAccount.executeQuery();
+			insertBankAccount.executeUpdate();
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -54,14 +60,14 @@ public class BankAccountPostgresDAO implements BankAccountDAO{
 		
 		//this should return the original object after its fields have been added to the db
 		return ba;
-	}
+	} //*/
 
 	public List<BankAccount> findAllAccounts() {
 		Connection conn = this.cf.getConnection();
 		List<BankAccount> allAccounts = new ArrayList<BankAccount>();
 		
 		try {
-			String sql = "select * from Bank_Accounts;";
+			String sql = "select * from bank_accounts;";
 			
 			//for very basic sql queries a statement is used
 			Statement s = conn.createStatement();

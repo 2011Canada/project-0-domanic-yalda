@@ -5,8 +5,8 @@ public class BankAccount {
 	
 	private double balance;
 	private String type; //checking or saving 
-	static int bankAccountId = 0;
-	
+	public static int bankAccountId = 1;
+	public int bankAccountNum; 
 	
 	public BankAccount() {
 		super();
@@ -16,9 +16,18 @@ public class BankAccount {
 	public BankAccount(double balance, String type) {
 		this.balance = balance;
 		this.type = type;
+		bankAccountNum = bankAccountId; 
 		bankAccountId++;
 	}
-	
+
+	public int getBankAccountNum() {
+		return bankAccountNum;
+	}
+
+	public void setBankAccountNum(int bankAccountNum) {
+		this.bankAccountNum = bankAccountNum;
+	}
+
 	public double getBalance() {
 		return balance;
 	}

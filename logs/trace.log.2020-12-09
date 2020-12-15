@@ -1,1 +1,2 @@
-2020-12-14 12:05:20 bankLogger [INFO] server is operation
+2020-12-14 18:57:01 bankLogger [INFO] server is operation
+2020-12-14 18:57:02 bankLogger [INFO] [Customer [username=dyalda, password=1234, firstName=domanic, lastName=yalda, bankAccount=null], Customer [username=dyalda1, password=12345, firstName=domanic1, lastName=yalda2, bankAccount=null], Customer [username=dyalda2, password=123456, firstName=domanic2, lastName=yalda3, bankAccount=null], Customer [username=dyalda3, password=1234567, firstName=domanic3, lastName=yalda4, bankAccount=null]]

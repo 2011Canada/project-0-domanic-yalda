@@ -2,17 +2,25 @@ package com.revature.menus;
 
 import java.util.Scanner;
 import com.revature.models.BankAccount;
+import com.revature.repositories.CustomerPostgresDAO;
+import com.revature.repositories.BankAccountPostgresDAO;
+import com.revature.repositories.EmployeePostgresDAO;
+import com.revature.services.CustomerServiceImplementation;
 import com.revature.models.*;
 import java.util.concurrent.TimeUnit;
 
 public class Display {
 	
+	CustomerPostgresDAO cpd = new CustomerPostgresDAO();
+	CustomerServiceImplementation csi = new CustomerServiceImplementation();
+	
 	public Display() {
 		super();
 	}
 	
+	
 	//Generic User interacting with Banking Terminal
-	public void LoginMenu() {
+	public Customer LoginMenu(Customer c) {
 		String username;
 		String password;
 		
@@ -20,6 +28,7 @@ public class Display {
 		
 		Scanner usernameInput = new Scanner(System.in);//creates a scanner object
 		username = usernameInput.nextLine(); //reads the scanner object and assigns the value to variable
+		
 		// add function to check username input with db 
 		
 		System.out.println("Enter Password: \n");
@@ -28,6 +37,13 @@ public class Display {
 			
 		//add function to check password input with db 
 		
+		if (csi.LoginMenu(c) == true) {
+			return c;
+		}else {
+			System.out.println("Invalid Customer login info");
+		}
+		
+		return null;
 	}
 	public void RegisterMenu() {
 		String firstName;
@@ -44,7 +60,10 @@ public class Display {
 		password = userCustomerRegisteration.nextLine();
 		
 		Customer newUser = new Customer(username, password, firstName, lastName, null);
-		//send customer data to db
+
+		//adding the registered user into the db
+		cpd.addCustomer(newUser, newUser.getBankAccount());
+		
 		System.out.println("Congratulations your new customer account has been created!!! \n");
 		System.out.println("Please save your Customer info for future uses:\n" + newUser.toString() + "\n");
 		System.out.println("Next step to freedom banking is to apply for a bank account \n");

@@ -2,16 +2,18 @@ package com.revature.models;
 
 public class Employee extends User{
 	
-	private static int employeeId;
+	private static int employeeId =1;
 	private String firstName;
 	private String lastName;
 	private String password;
+	public int employeeNum;
 	
 	public Employee(String firstName, String lastName, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
+		employeeNum = employeeId;
 		employeeId++;
 	}
 	
