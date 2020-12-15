@@ -6,6 +6,7 @@ import com.revature.repositories.CustomerPostgresDAO;
 import com.revature.repositories.BankAccountPostgresDAO;
 import com.revature.repositories.EmployeePostgresDAO;
 import com.revature.services.CustomerServiceImplementation;
+import com.revature.services.EmployeeServiceImplementation;
 import com.revature.models.*;
 import java.util.concurrent.TimeUnit;
 
@@ -13,14 +14,32 @@ public class Display {
 	
 	CustomerPostgresDAO cpd = new CustomerPostgresDAO();
 	CustomerServiceImplementation csi = new CustomerServiceImplementation();
+	EmployeeServiceImplementation esi = new EmployeeServiceImplementation();
+	
+	BankAccountPostgresDAO bapd = new BankAccountPostgresDAO();
+	
 	
 	public Display() {
 		super();
 	}
 	
+	public void MainMenu() {
+		int option;
+		System.out.println("Select 1 to Login \n"
+				+ "Select 2 to Register");
+		Scanner userInput = new Scanner(System.in);
+		option = userInput.nextInt();
+		if(option == 1) {
+			LoginMenu();
+		}else if (option == 2) {
+			RegisterMenu();
+		}
+	}
 	
-	//Generic User interacting with Banking Terminal
-	public Customer LoginMenu(Customer c) {
+	//Generic User interacting with Banking Terminal works
+	public void LoginMenu() {
+		Customer c = new Customer();
+		Employee e = new Employee();
 		String username;
 		String password;
 		
@@ -34,16 +53,22 @@ public class Display {
 		System.out.println("Enter Password: \n");
 		Scanner passwordInput = new Scanner(System.in);
 		password = passwordInput.nextLine();
+		c.setUsername(username);
+		c.setPassword(password);
+		e.setEmployeeNum(Integer.parseInt(username));//since an employee logs in with their employee id, the username input is passed as an int
+		e.setPassword(password);	
+		//add function to check password input with db
+		//checks the employee and customer tables 
+		
+		if (csi.LoginCheck(c) == true) {
+			CustomerMenu();
 			
-		//add function to check password input with db 
-		
-		if (csi.LoginMenu(c) == true) {
-			return c;
+		}else if (esi.LoginCheck(e) == true){
+			EmployeeMenu();
 		}else {
-			System.out.println("Invalid Customer login info");
+			System.out.println("Invalid Customer login info returning to the Main Menu");
+			MainMenu();
 		}
-		
-		return null;
 	}
 	public void RegisterMenu() {
 		String firstName;
@@ -76,7 +101,9 @@ public class Display {
 		System.out.println("Would you like to deposit money, withdraw money, or apply for a bank account");
 		System.out.println("Enter 1 to go to the deposit menu: \n"
 				+ "Enter 2 to go to withdraw menu: \n"
-				+ "Enter 3 to apply for a bank account \n");
+				+ "Enter 3 to apply for a bank account \n"
+				+ "Enter 4 to view current account balance \n"
+				+ "Enter 5 to transfer money to another customer \n");
 		
 		Scanner userOptions = new Scanner(System.in);
 		options = userOptions.nextInt();
@@ -91,6 +118,13 @@ public class Display {
 			case 3:
 				ApplyForBankAccount();
 				break;
+			case 4:
+				//view current balance
+				break;
+			case 5:
+				//TransferMoney();
+				break;
+				
 			default:
 				System.out.println("Incorrect input try again");
 			try {
@@ -152,8 +186,34 @@ public class Display {
 		System.out.println("The Account details are: " + bankAccount.toString());
 		
 	}
+	
+	public void TransferMoney(Customer c1, Customer c2) {
+		
+	}
+	
 	// Employee menu methods 
 	public void EmployeeMenu() {
-		System.out.println("");
+		int options;
+		System.out.println("Enter 1 to view all current bank accounts "
+				+ "2 to view all the current customers "
+				+ "3 to view a log of all the details"
+				+ "4 to leave the Employee Menu");
+		Scanner employeeInput = new Scanner(System.in);
+		options = employeeInput.nextInt();
+		if (options==1) {
+			bapd.findAllAccounts();
+			EmployeeMenu();
+		}else if(options == 2) {
+			cpd.findAllCustomers();
+			EmployeeMenu();
+		}else if (options == 3) {
+			//print out the logs
+			EmployeeMenu();
+		}else if (options ==4) {
+			LoginMenu();
+		}else {
+			System.out.println("incorrect input try again");
+			EmployeeMenu();
+		}
 	}
 }

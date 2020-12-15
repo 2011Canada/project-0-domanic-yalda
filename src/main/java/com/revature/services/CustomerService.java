@@ -5,7 +5,7 @@ import com.revature.models.Customer;
 
 public interface CustomerService{
 		
-		public boolean LoginMenu(Customer c);
+		public boolean LoginCheck(Customer c);
 		public Display RegisterMenu();
 	}
 

@@ -4,27 +4,25 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.revature.launcher.BankLauncher;
 import com.revature.menus.Display;
-import com.revature.models.Customer;
+import com.revature.models.Employee;
 import com.revature.util.ConnectionFactory;
 
-public class CustomerServiceImplementation implements CustomerService{
+public class EmployeeServiceImplementation implements EmployeeService{
 
 	private ConnectionFactory cf = ConnectionFactory.getConnectionFactory();
 	Connection conn = this.cf.getConnection();
-
-	public CustomerServiceImplementation() {
+	
+	
+	public EmployeeServiceImplementation() {
 		super();
 	}
-
-	public boolean LoginCheck(Customer c) {
+	
+	public boolean LoginCheck(Employee e) {
 		Connection conn = this.cf.getConnection();
 		try {
-			String sql = "select * from customer where (username =" +c.getUsername() +") AND (password = "+ c.getPassword() +" ));";
+			String sql = "select * from employee where (employee_id = " + e.getEmployeeNum() +") AND (password = "+ e.getPassword() +" ));";
 			
 			Statement s = conn.createStatement();
 			ResultSet res = s.executeQuery(sql);
@@ -32,18 +30,18 @@ public class CustomerServiceImplementation implements CustomerService{
 			if(res.next()) {
 				return true;
 			}	
-		}catch(SQLException e){
-			e.printStackTrace();
+		}catch(SQLException e1){
+			e1.printStackTrace();
 		}finally {
 			cf.releaseConnection(conn);
 		}
 		//BankLauncher.bankLogger.info(allCustomers);
 		return false;
 	}
-
 	public Display RegisterMenu() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
