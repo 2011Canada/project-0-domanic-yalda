@@ -22,7 +22,7 @@ public class EmployeeServiceImplementation implements EmployeeService{
 	public boolean LoginCheck(Employee e) {
 		Connection conn = this.cf.getConnection();
 		try {
-			String sql = "select * from employee where (employee_id = " + e.getEmployeeNum() +") AND (password = "+ e.getPassword() +" ));";
+			String sql = "select * from employee where (( employee_id = " + e.getEmployeeNum() +") and (password = '"+ e.getPassword() +"' ));";
 			
 			Statement s = conn.createStatement();
 			ResultSet res = s.executeQuery(sql);

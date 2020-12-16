@@ -24,7 +24,7 @@ public class CustomerServiceImplementation implements CustomerService{
 	public boolean LoginCheck(Customer c) {
 		Connection conn = this.cf.getConnection();
 		try {
-			String sql = "select * from customer where (username =" +c.getUsername() +") AND (password = "+ c.getPassword() +" ));";
+			String sql = "select * from customer where ((username ='" +c.getUsername() +"') AND (password = '"+ c.getPassword() +"' ));";
 			
 			Statement s = conn.createStatement();
 			ResultSet res = s.executeQuery(sql);
