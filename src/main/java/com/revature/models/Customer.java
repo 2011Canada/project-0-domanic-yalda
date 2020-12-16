@@ -46,10 +46,13 @@ public class Customer extends User{
 	public BankAccount deposit(double depositAmount) {
 		BankAccount b = this.bankAccount;
 		
+		if (depositAmount>0) {
 		b.setBalance(b.getBalance() + depositAmount);
-		
+		}else {
+			System.out.println("cannot deposit a negative number");
+		}
 		//send new updated bank account info into the db
-		System.out.println("Your new BankAccount balance is: " + bankAccount.getBalance());
+		System.out.println("Your BankAccount balance is: " + bankAccount.getBalance());
 		return bankAccount;
 	}
 	

@@ -1,5 +1,1 @@
-2020-12-16 00:01:40 bankLogger [INFO] server is operation
-2020-12-16 00:01:51 bankLogger [INFO] A new Customer has been added into the system Customer [username=dy, password=123, firstName=dom, lastName=yal, bankAccount=null]
-2020-12-16 00:02:12 bankLogger [INFO] The Customer dom applied for a new bank account with details: BankAccount [type=checking, balance=9000.0]
-2020-12-16 00:02:19 bankLogger [INFO] The Customer dom deposited: 322.0
-2020-12-16 00:02:30 bankLogger [INFO] The Customer dom withdrew: 22.0
+2020-12-16 03:13:12 bankLogger [INFO] server is operation

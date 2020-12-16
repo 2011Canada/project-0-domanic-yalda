@@ -33,10 +33,9 @@ public class Display {
 		System.out.println("Select 1 for Customer Login \n"
 				+ "Select 2 to Register \n"
 				+ "Select 3 for Employee Login");
-		while(option !=1 || option !=2 || option !=3){
+		while((option !=1) && (option !=2) && (option !=3)){
 		Scanner userInput = new Scanner(System.in);
 		option = userInput.nextInt();
-		break;
 		}
 		if(option == 1) {
 			LoginMenu();
@@ -289,9 +288,10 @@ public class Display {
 		int option = 0;
 		System.out.println("Select 1 to accept money being transfered"
 				+ "Select 2 to decline the money transfer");
-		while (option!= 1 || option !=2) {
+		while ((option != 1) &&(option !=2)) {
 		Scanner choiceInput = new Scanner(System.in);
 		option = choiceInput.nextInt();
+		
 		}
 		if (option == 1) {
 			return true;

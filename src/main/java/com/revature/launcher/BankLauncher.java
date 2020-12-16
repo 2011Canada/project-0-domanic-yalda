@@ -20,8 +20,12 @@ public class BankLauncher {
 		Display disp = new Display();
 		
 		
-		Customer vipMember = new Customer("dy","1234","domanic","yalda", new BankAccount(1000000,"checking"));
-		cpd.addCustomer(vipMember, vipMember.getBankAccount());
+		Customer vipMember1 = new Customer("jb","1234","jeff","bezos", new BankAccount(100000001,"checking"));
+		cpd.addCustomer(vipMember1, vipMember1.getBankAccount());
+		Customer vipMember2 = new Customer("bg","4321","bill","gates", new BankAccount(100000000,"checking"));
+		cpd.addCustomer(vipMember2, vipMember2.getBankAccount());
+		
+		//disp.TransferMoney(vipMember1, vipMember2); tested working transfer function no db connections
 		while(true) {
 			
 			//server running to get using input and server outputs
@@ -29,9 +33,7 @@ public class BankLauncher {
 			
 			disp.MainMenu();
 			
-			break;
-			
-			
+			break;	
 			
 		}
 
